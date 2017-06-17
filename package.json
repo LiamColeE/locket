@@ -1,0 +1,27 @@
+{
+  "name": "locket",
+  "version": "1.0.0",
+  "description": "A simple password manager.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkeedlinger/locket.git"
+  },
+  "keywords": [
+    "password",
+    "manager"
+  ],
+  "author": "mkeedlinger",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mkeedlinger/locket/issues"
+  },
+  "homepage": "https://github.com/mkeedlinger/locket#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "triplesec": "^3.0.25"
+  }
+}
