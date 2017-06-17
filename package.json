@@ -22,6 +22,7 @@
   "homepage": "https://github.com/mkeedlinger/locket#readme",
   "dependencies": {
     "express": "^4.15.3",
+    "object.defaults": "^1.1.0",
     "triplesec": "^3.0.25"
   }
 }
