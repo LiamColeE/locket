@@ -1,5 +1,5 @@
 const app = require('express')()
-const fs = require('fs')
+const config = require('./config')
 
 // Web App
 app.get('/', function(req, res) {
