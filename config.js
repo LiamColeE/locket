@@ -50,13 +50,16 @@ defaults(config, configDefaults)
 ////
 try {
   fs.accessSync(config.configFile)
-  var tempConfig = JSON.parse(fs.readFileSync(config.configFile, { encoding: 'utf8' }))
-  Object.assign(tempConfig, config);
+  var tempConfig = JSON.parse(
+    fs.readFileSync(config.configFile, { encoding: 'utf8' })
+  )
+  Object.assign(tempConfig, config)
   config = tempConfig
 } catch (error) {
   console.info(
     'Either there is no config file or something went wrong getting it.'
   )
+  console.error(error)
 }
 
 module.exports = config
