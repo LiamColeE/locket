@@ -3,6 +3,7 @@
 const fs = require('fs')
 const com = require('commander')
 const defaults = require('object.defaults')
+const path = require('path')
 
 var cwd
 if (process.pkg) {
@@ -22,9 +23,11 @@ com
   .option('-s, --https', 'Enable HTTPS. Disables insecure HTTP.')
   .option('-d, --data <path>', 'Location of the data file.')
   .option('-p, --port <port>', 'Which port to start server on.')
+  .option(
+    '--export <path>',
+    'Export the data file as JSON, to the supplied path.'
+  )
   .parse(process.argv)
-  .command('export <in> <out>')
-  .description('Exports your data file as a JSON file.')
 
 var config = {
   useHTTPS: !!com.https,
@@ -47,9 +50,6 @@ defaults(config, {
   configFile: configDefaults.configFile
 })
 
-////
-// Config
-////
 try {
   var tempConfig = JSON.parse(
     fs.readFileSync(config.configFile, { encoding: 'utf8' })
@@ -60,7 +60,7 @@ try {
   console.info(
     'Either there is no config file or something went wrong getting it.'
   )
-  console.error(error)
+  // console.error(error)
 }
 
 defaults(config, configDefaults)
