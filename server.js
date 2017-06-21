@@ -16,19 +16,3 @@ app.use('/api', api)
 app.listen(config.port, function() {
   console.info(`Listening on port ${config.port}`)
 })
-
-////
-// functions
-////
-function propertyExists(obj, nesting) {
-  for (var i = 0; i < nesting.length; i++) {
-    if (!obj || !obj.hasOwnProperty(nesting[i])) {
-      return {
-        name: nesting[i],
-        index: i
-      } // returns where things stopped being found
-    }
-    obj = obj[nesting[i]]
-  }
-  return true
-}
