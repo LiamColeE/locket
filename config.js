@@ -12,7 +12,7 @@ if (process.pkg) {
 }
 
 com
-  .version(require('package.json').version)
+  .version(require('./package.json').version)
   .option(
     '-c, --config-file <path>',
     'Location of the config file [./config.json].'
