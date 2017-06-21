@@ -38,8 +38,8 @@ var config = {
 }
 var configDefaults = {
   useHTTPS: false,
-  dataFile: path.resolve(cwd, '/data.locket'),
-  configFile: path.resolve(cwd, '/config.js'),
+  dataFile: path.resolve(cwd, './data.locket'),
+  configFile: path.resolve(cwd, './config.js'),
   port: 8080
 }
 
