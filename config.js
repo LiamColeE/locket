@@ -43,13 +43,14 @@ var configDefaults = {
   port: 8080
 }
 
-defaults(config, configDefaults)
+defaults(config, {
+  configFile: configDefaults.configFile
+})
 
 ////
 // Config
 ////
 try {
-  fs.accessSync(config.configFile)
   var tempConfig = JSON.parse(
     fs.readFileSync(config.configFile, { encoding: 'utf8' })
   )
@@ -61,5 +62,7 @@ try {
   )
   console.error(error)
 }
+
+defaults(config, configDefaults)
 
 module.exports = config
