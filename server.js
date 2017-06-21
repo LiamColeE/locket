@@ -13,8 +13,8 @@ app.use('/api', api)
 ////
 // start!
 ////
-app.listen(3000, function() {
-  console.info('Listening...')
+app.listen(config.port, function() {
+  console.info(`Listening on port ${config.port}`)
 })
 
 ////
