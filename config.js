@@ -43,7 +43,8 @@ var configDefaults = {
   useHTTPS: false,
   dataFile: path.resolve(cwd, './data.locket'),
   configFile: path.resolve(cwd, './config.js'),
-  port: 8080
+  port: 8080,
+  tempPassword: 'please_do_not_use_this_default...'
 }
 
 defaults(config, {
