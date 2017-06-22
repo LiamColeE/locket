@@ -34,7 +34,7 @@ exports.data = (function() {
       res = {
         accounts: [],
         last_id: 0,
-        password_hash: null,
+        pass_hash: null,
         tokens: {
           revoked: [],
           current: []
