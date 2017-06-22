@@ -3,6 +3,11 @@ const bodyParser = require('body-parser')
 const config = require('./config')
 const fs = require('fs')
 const api = require('./api/')
+const data = require('./data')
+const crypto = require('./crypto')
+const cookieParser = require('cookie-parser')
+
+app.use(cookieParser())
 
 app.use(bodyParser.json())
 
@@ -11,7 +16,23 @@ app.get('/', function(req, res) {
   res.send('This will someday be a little Vue app.')
 })
 
-app.use('/api', api)
+// use api routes
+app.use(
+  '/api',
+  function(req, res, next) {
+    if (
+      data.data.tokens.current.includes(req.cookies.token) ||
+      (!data.pass_hash &&
+        req.body.passHash === crypto.hashPass(config.tempPass)) ||
+      data.pass_hash === req.body.passHash
+    ) {
+      next()
+    } else {
+      res.status(401).send()
+    }
+  },
+  api
+)
 
 ////
 // start!
