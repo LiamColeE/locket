@@ -1,3 +1,6 @@
+# Locket data
+*.locket
+
 # Logs
 logs
 *.log
