@@ -1,7 +1,10 @@
 const app = require('express')()
+const bodyParser = require('body-parser')
 const config = require('./config')
 const fs = require('fs')
 const api = require('./api/')
+
+app.use(bodyParser.json())
 
 // Web App
 app.get('/', function(req, res) {
