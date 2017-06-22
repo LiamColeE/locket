@@ -1,6 +1,6 @@
 const fs = require('fs')
 const config = require('./config')
-const promise = require('bluebird')
+const Promise = require('bluebird')
 
 exports.data = {}
 
