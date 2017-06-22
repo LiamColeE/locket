@@ -61,6 +61,7 @@ try {
   console.info(
     'Either there is no config file or something went wrong getting it.'
   )
+  console.info('Filling in with sane defaults...')
   // console.error(error)
 }
 
