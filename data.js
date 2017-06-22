@@ -3,9 +3,7 @@ const Promise = require('bluebird')
 const fs = Promise.promisifyAll(require('fs'))
 const msgpack = require('msgpack-lite')
 
-exports.data = msgpack.decode(fs.readFileSync(config.dataPath))
-
-exports.propertyExists = function(obj, nesting) {
+exports.propertyExists = function propertyExists(obj, nesting) {
   let placeholderObj = obj
   for (let i = 0; i < nesting.length; i++) {
     if (!placeholderObj || !placeholderObj.hasOwnProperty(nesting[i])) {
@@ -19,6 +17,40 @@ exports.propertyExists = function(obj, nesting) {
   return true
 }
 
-exports.saveToDisk = function() {
+exports.saveToDisk = function saveToDisk() {
   return fs.writeFileAsync(config.dataPath, msgpack.encode(exports.data))
 }
+
+exports.data = (function() {
+  let res
+  try {
+    res = msgpack.decode(fs.readFileSync(config.dataPath))
+    return res
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      console.info(
+        `Data file at ${config.dataPath} not found. Creating a default one.`
+      )
+      res = {
+        accounts: [],
+        last_id: 0,
+        password_hash: null,
+        tokens: {
+          revoked: [],
+          current: []
+        },
+        settings: {
+          password_timeout: 3600, // time in seconds before password re-prompt (1 hour)
+          never_prompt_list: [],
+          prompt_to_save: true
+        }
+      }
+      exports.data = res
+      saveToDisk()
+      return res
+    } else {
+      console.info('Issue loading data file.')
+      console.error(error)
+    }
+  }
+})()
