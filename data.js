@@ -1,8 +1,9 @@
-const fs = require('fs')
 const config = require('./config')
 const Promise = require('bluebird')
+const fs = Promise.promisifyAll(require('fs'))
+const msgpack = require('msgpack-lite')
 
-exports.data = {}
+exports.data = msgpack.decode(fs.readFileSync(config.dataPath))
 
 exports.propertyExists = function(obj, nesting) {
   let placeholderObj = obj
@@ -19,5 +20,5 @@ exports.propertyExists = function(obj, nesting) {
 }
 
 exports.saveToDisk = function() {
-  fs.write
+  return fs.writeFileAsync(config.dataPath, msgpack.encode(exports.data))
 }
