@@ -46,7 +46,7 @@ exports.data = (function() {
         }
       }
       exports.data = res
-      saveToDisk()
+      exports.saveToDisk()
       return res
     } else {
       console.info('Issue loading data file.')
