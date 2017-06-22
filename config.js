@@ -15,7 +15,7 @@ if (process.pkg) {
 com
   .version(require('./package.json').version)
   .option(
-    '-c, --config-file <path>',
+    '-c, --config-path <path>',
     'Location of the config file [./config.json].'
   )
   .option('--cert <path>', 'Location of the HTTPS certificate.')
@@ -34,26 +34,26 @@ var config = {
   certPath: com.cert ? path.resolve(cwd, com.cert) : undefined,
   keyPath: com.key ? path.resolve(cwd, com.key) : undefined,
   dataPath: com.data ? path.resolve(cwd, com.data) : undefined,
-  configFile: com.configFile ? path.resolve(cwd, com.configFile) : undefined,
+  configPath: com.configPath ? path.resolve(cwd, com.configPath) : undefined,
   port: com.port
     ? parseInt(com.port) === NaN ? undefined : parseInt(com.port)
     : undefined
 }
 var configDefaults = {
   useHTTPS: false,
-  dataFile: path.resolve(cwd, './data.locket'),
-  configFile: path.resolve(cwd, './config.js'),
+  dataPath: path.resolve(cwd, './data.locket'),
+  configPath: path.resolve(cwd, './config.js'),
   port: 8080,
   tempPassword: 'please_do_not_use_this_default...'
 }
 
 defaults(config, {
-  configFile: configDefaults.configFile
+  configPath: configDefaults.configPath
 })
 
 try {
   var tempConfig = JSON.parse(
-    fs.readFileSync(config.configFile, { encoding: 'utf8' })
+    fs.readFileSync(config.configPath, { encoding: 'utf8' })
   )
   Object.assign(tempConfig, config)
   config = tempConfig
