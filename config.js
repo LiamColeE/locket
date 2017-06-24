@@ -5,11 +5,11 @@ const com = require('commander')
 const defaults = require('object.defaults')
 const path = require('path')
 
-var cwd
+var workingDir
 if (process.pkg) {
-  cwd = path.dirname(process.execPath)
+  workingDir = path.dirname(process.execPath)
 } else {
-  cwd = process.cwd()
+  workingDir = process.cwd()
 }
 
 com
@@ -31,18 +31,18 @@ com
 
 var config = {
   useHTTPS: !!com.https,
-  certPath: com.cert ? path.resolve(cwd, com.cert) : undefined,
-  keyPath: com.key ? path.resolve(cwd, com.key) : undefined,
-  dataPath: com.data ? path.resolve(cwd, com.data) : undefined,
-  configPath: com.configPath ? path.resolve(cwd, com.configPath) : undefined,
+  certPath: com.cert ? path.resolve(workingDir, com.cert) : undefined,
+  keyPath: com.key ? path.resolve(workingDir, com.key) : undefined,
+  dataPath: com.data ? path.resolve(workingDir, com.data) : undefined,
+  configPath: com.configPath ? path.resolve(workingDir, com.configPath) : undefined,
   port: com.port
     ? parseInt(com.port) === NaN ? undefined : parseInt(com.port)
     : undefined
 }
 var configDefaults = {
   useHTTPS: false,
-  dataPath: path.resolve(cwd, './data.locket'),
-  configPath: path.resolve(cwd, './config.js'),
+  dataPath: path.resolve(workingDir, './data.locket'),
+  configPath: path.resolve(workingDir, './config.js'),
   port: 8080,
   tempPass: 'please_do_not_use_this_default...'
 }
