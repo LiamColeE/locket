@@ -18,7 +18,7 @@ exports.propertyExists = function propertyExists(obj, nesting) {
 }
 
 exports.saveToDisk = function saveToDisk() {
-  return fs.writeFileAsync(config.dataPath, msgpack.encode(exports.data))
+  fs.writeFileSync(config.dataPath, msgpack.encode(exports.data))
 }
 
 exports.data = (function() {
@@ -33,7 +33,7 @@ exports.data = (function() {
       )
       res = {
         accounts: [],
-        last_id: 0,
+        next_id: 0,
         pass_hash: null,
         tokens: {
           revoked: [],
