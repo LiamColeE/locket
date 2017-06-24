@@ -22,9 +22,9 @@ app.use(
   function(req, res, next) {
     if (
       data.data.tokens.current.includes(req.cookies.token) ||
-      (!data.pass_hash &&
+      (!data.data.pass_hash &&
         req.body.passHash === crypto.hashPass(config.tempPass)) ||
-      data.pass_hash === req.body.passHash
+      (data.data.pass_hash && data.data.pass_hash === req.body.passHash)
     ) {
       next()
     } else {
