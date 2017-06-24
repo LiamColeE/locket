@@ -1,5 +1,5 @@
 {
-  "name": "locket",
+  "name": "locket-pm",
   "version": "0.1.0",
   "description": "A simple password manager.",
   "main": "server.js",
