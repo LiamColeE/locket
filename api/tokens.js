@@ -1,21 +1,15 @@
 const router = require('express').Router()
 
-// Tokens
 router.get('/', function(req, res) {
-  // show all authorized tokens
-  // make default to just get names, add a parameter to get all the info
-})
-
-router.get('/:id', function(req, res) {
-  // get info on the one token
+  // get all token data
 })
 
 router.post('/', function(req, res) {
-  // add an authorized token
+  // get a new token with the name that was passed in
 })
 
-router.delete('/:id', function(req, res) {
-  // remove token access
+router.get('/revoked', function(req, res) {
+  // return the tokens that were manually revoked by the user
 })
 
 module.exports = router
