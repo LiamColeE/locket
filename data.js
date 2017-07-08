@@ -33,7 +33,8 @@ exports.data = (function() {
       )
       res = {
         accounts: [],
-        next_id: 0,
+        next_account_id: 0,
+        next_token_id: 1,
         pass_hash: null,
         tokens: {
           revoked: [],
