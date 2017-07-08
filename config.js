@@ -3,18 +3,19 @@
 const fs = require('fs')
 const com = require('commander')
 const defaults = require('object.defaults')
+const path = require('path')
 
-var cwd
+var workingDir
 if (process.pkg) {
-  cwd = path.dirname(process.execPath)
+  workingDir = path.dirname(process.execPath)
 } else {
-  cwd = process.cwd()
+  workingDir = process.cwd()
 }
 
 com
-  .version(require('package.json').version)
+  .version(require('./package.json').version)
   .option(
-    '-c, --config-file <path>',
+    '-c, --config-path <path>',
     'Location of the config file [./config.json].'
   )
   .option('--cert <path>', 'Location of the HTTPS certificate.')
@@ -22,41 +23,48 @@ com
   .option('-s, --https', 'Enable HTTPS. Disables insecure HTTP.')
   .option('-d, --data <path>', 'Location of the data file.')
   .option('-p, --port <port>', 'Which port to start server on.')
+  .option(
+    '--export <path>',
+    'Export the data file as JSON, to the supplied path.'
+  )
   .parse(process.argv)
-  .command('export <in> <out>')
-  .description('Exports your data file as a JSON file.')
 
 var config = {
   useHTTPS: !!com.https,
-  certPath: com.cert ? path.resolve(cwd, com.cert) : undefined,
-  keyPath: com.key ? path.resolve(cwd, com.key) : undefined,
-  dataPath: com.data ? path.resolve(cwd, com.data) : undefined,
-  configFile: com.configFile ? path.resolve(cwd, com.configFile) : undefined,
+  certPath: com.cert ? path.resolve(workingDir, com.cert) : undefined,
+  keyPath: com.key ? path.resolve(workingDir, com.key) : undefined,
+  dataPath: com.data ? path.resolve(workingDir, com.data) : undefined,
+  configPath: com.configPath ? path.resolve(workingDir, com.configPath) : undefined,
   port: com.port
     ? parseInt(com.port) === NaN ? undefined : parseInt(com.port)
     : undefined
 }
 var configDefaults = {
   useHTTPS: false,
-  dataFile: path.resolve(cwd, '/data.locket'),
-  configFile: path.resolve(cwd, '/config.js'),
-  port: 8080
+  dataPath: path.resolve(workingDir, './data.locket'),
+  configPath: path.resolve(workingDir, './config.js'),
+  port: 8080,
+  tempPass: 'please_do_not_use_this_default...'
 }
 
-defaults(config, configDefaults)
+defaults(config, {
+  configPath: configDefaults.configPath
+})
 
-////
-// Config
-////
 try {
-  fs.accessSync(config.configFile)
-  var tempConfig = JSON.parse(fs.readFileSync(config.configFile, { encoding: 'utf8' }))
-  Object.assign(tempConfig, config);
+  var tempConfig = JSON.parse(
+    fs.readFileSync(config.configPath, { encoding: 'utf8' })
+  )
+  Object.assign(tempConfig, config)
   config = tempConfig
 } catch (error) {
   console.info(
     'Either there is no config file or something went wrong getting it.'
   )
+  console.info('Filling in with sane defaults...')
+  // console.error(error)
 }
+
+defaults(config, configDefaults)
 
 module.exports = config

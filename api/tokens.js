@@ -1,21 +1,77 @@
 const router = require('express').Router()
+const data = require('../data')
+const crypto = require('../crypto')
 
-// Tokens
 router.get('/', function(req, res) {
-  // show all authorized tokens
-  // make default to just get names, add a parameter to get all the info
-})
-
-router.get('/:id', function(req, res) {
-  // get info on the one token
+  if (req.query.full == 1) {
+    res.json(
+      Array.from(data.data.tokens.current, token => {
+        token.value = null
+        return token
+      })
+    )
+  } else {
+    res.json(
+      Array.from(data.data.tokens.current, token => {
+        return {
+          id: token.id,
+          name: token.name
+        }
+      })
+    )
+  }
 })
 
 router.post('/', function(req, res) {
-  // add an authorized token
+  // get a new token with the name that was passed in
+  if (typeof req.body === 'string') {
+    let newToken = {
+      name: req.body,
+      id: data.data.next_token_id++,
+      issue_time: new Date().toISOString(),
+      expire_time: new Date(
+        Date.now() + data.data.settings.password_timeout * 1000
+      ).toISOString(),
+      value: crypto.genToken(),
+      creator_ip: req.ip
+    }
+
+    data.data.tokens.current.push(newToken)
+    data.saveToDisk()
+
+    res.status(201).json({
+      id: newToken.id,
+      expire_time: newToken.expire_time,
+      value: newToken.value
+    })
+  } else {
+    res
+      .status(400)
+      .json({ error: 'Body should be a string that is stringified JSON.' })
+  }
+})
+
+router.get('/revoked', function(req, res) {
+  // return the tokens that were manually revoked by the user
+  res.json(data.data.tokens.revoked)
 })
 
 router.delete('/:id', function(req, res) {
-  // remove token access
+  // revoke a token
+  let tokenIndex = data.data.accounts.findIndex(token => {
+    return token.id == req.params.id
+  })
+
+  if (tokenIndex === -1) {
+    res.status(404).end()
+  } else {
+    let token = data.data.tokens.current.splice(tokenIndex, 1)
+    token.revoked_time = new Date().toISOString()
+
+    data.data.tokens.revoked.push(token)
+    data.saveToDisk()
+    res.status(204).end()
+  }
 })
 
 module.exports = router
