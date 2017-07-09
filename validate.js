@@ -11,6 +11,13 @@ val.validators.string = function(value) {
     }
   }
 }
+val.validators.defined = function(value) {
+  if (value === undefined) {
+    return 'must be defined.'
+  } else {
+    return undefined
+  }
+}
 module.exports = val
 
 module.exports.constraints = {}
@@ -86,63 +93,63 @@ module.exports.constraints.newAccount = {
   },
   url: {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 3000
     }
   },
   username: {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 3000
     }
   },
   notes: {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 3000
     }
   },
   password: {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 3000
     }
   },
   change_password: {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 3000
     }
   },
   'form_entry.username': {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 3000
     }
   },
   'form_entry.password': {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 3000
     }
   },
   access_requires_password: {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 500
     }
   },
   autofill: {
     string: true,
-    presence: true,
+    defined: true,
     length: {
       maximum: 500
     }
