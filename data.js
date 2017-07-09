@@ -22,11 +22,13 @@ exports.saveToDisk = function saveToDisk() {
 }
 
 exports.checkTokenTimes = function checkTokenTimes() {
-  exports.data.tokens.current = exports.data.tokens.current.filter(function(token){
-    let now  = new Date()
+  exports.data.tokens.current = exports.data.tokens.current.filter(function(
+    token
+  ) {
+    let now = new Date()
     let expireTime = new Date(token.expire_time)
 
-    return (expireTime - now) >= 0
+    return expireTime - now >= 0
   })
 }
 

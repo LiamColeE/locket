@@ -34,7 +34,9 @@ var config = {
   certPath: com.cert ? path.resolve(workingDir, com.cert) : undefined,
   keyPath: com.key ? path.resolve(workingDir, com.key) : undefined,
   dataPath: com.data ? path.resolve(workingDir, com.data) : undefined,
-  configPath: com.configPath ? path.resolve(workingDir, com.configPath) : undefined,
+  configPath: com.configPath
+    ? path.resolve(workingDir, com.configPath)
+    : undefined,
   port: com.port
     ? parseInt(com.port) === NaN ? undefined : parseInt(com.port)
     : undefined
