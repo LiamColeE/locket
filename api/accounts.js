@@ -81,7 +81,7 @@ router.delete('/:id', function(req, res) {
   data.saveToDisk()
 })
 
-router.post(':id', function(req, res) {
+router.post('/:id', function(req, res) {
   // update an account and return the new version number
   let clientAccount = val.cleanAttributes(
     req.body,
