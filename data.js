@@ -21,6 +21,15 @@ exports.saveToDisk = function saveToDisk() {
   fs.writeFileSync(config.dataPath, msgpack.encode(exports.data))
 }
 
+exports.checkTokenTimes = function checkTokenTimes() {
+  exports.data.tokens.current = exports.data.tokens.current.filter(function(token){
+    let now  = new Date()
+    let expireTime = new Date(token.expire_time)
+
+    return (expireTime - now) >= 0
+  })
+}
+
 exports.data = (function() {
   let res
   try {

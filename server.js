@@ -20,6 +20,7 @@ app.get('/', function(req, res) {
 app.use(
   '/api',
   function(req, res, next) {
+    data.checkTokenTimes()
     if (
       data.data.tokens.current.includes(req.cookies.token) ||
       (!data.data.pass_hash &&
