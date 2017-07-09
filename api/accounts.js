@@ -76,7 +76,7 @@ router.delete('/:id', function(req, res) {
     res.status(404).end()
   } else {
     data.data.accounts.splice(accountIndex, 1)
-    res.status(204)
+    res.status(204).end()
   }
   data.saveToDisk()
 })
