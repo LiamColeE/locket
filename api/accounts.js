@@ -34,9 +34,9 @@ router.post('/', function(req, res) {
   let account = val.cleanAttributes(req.body, val.constraints.newAccount)
   let validation = val(account, val.constraints.newAccount)
   if (validation === undefined) {
-    account.version = 1
+    account.version = 0
     console.log(data)
-    account.id = data.data.next_id++
+    account.id = data.data.next_account_id++
     data.data.accounts.push(account)
     data.saveToDisk()
     res.status(201).json({
