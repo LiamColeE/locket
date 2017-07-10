@@ -11,6 +11,7 @@ val.validators.string = function(value) {
     }
   }
 }
+<<<<<<< HEAD
 val.validators.defined = function(value) {
   if (value === undefined) {
     return 'must be defined.'
@@ -18,6 +19,8 @@ val.validators.defined = function(value) {
     return undefined
   }
 }
+=======
+>>>>>>> origin/account-api
 module.exports = val
 
 module.exports.constraints = {}
@@ -93,63 +96,99 @@ module.exports.constraints.newAccount = {
   },
   url: {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 3000
     }
   },
   username: {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 3000
     }
   },
   notes: {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 3000
     }
   },
   password: {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 3000
     }
   },
   change_password: {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 3000
     }
   },
   'form_entry.username': {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 3000
     }
   },
   'form_entry.password': {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 3000
     }
   },
   access_requires_password: {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 500
     }
   },
   autofill: {
     string: true,
+<<<<<<< HEAD
     defined: true,
+=======
+    presence: true,
+>>>>>>> origin/account-api
     length: {
       maximum: 500
     }
