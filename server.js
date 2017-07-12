@@ -17,7 +17,7 @@ app.get('/', function(req, res) {
 
 // Auth
 function auth(req, res, next) {
-  data.checkTokenTimes()
+  data.removeExpiredTokens()
 
   let dat = data.data
 

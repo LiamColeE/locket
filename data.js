@@ -21,7 +21,7 @@ exports.saveToDisk = function saveToDisk() {
   fs.writeFileSync(config.dataPath, msgpack.encode(exports.data))
 }
 
-exports.checkTokenTimes = function checkTokenTimes() {
+exports.removeExpiredTokens = function removeExpiredTokens() {
   exports.data.tokens.current = exports.data.tokens.current.filter(function(
     token
   ) {
