@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Locket</title>
+</head>
+
+<body>
+  <h1>Locket</h1>
+
+  <div id="app">
+    <account-card
+      v-for="item in accounts"
+      v-bind:account="item"
+      v-bind:key="item.id"
+    ><account-card>
+  </div>
+
+  <script src="https://unpkg.com/vue@2"></script>
+  <script src="https://unpkg.com/axios@0.16/dist/axios.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+
+</html>

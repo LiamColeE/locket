@@ -1,4 +1,5 @@
-const app = require('express')()
+const express = require('express')
+const app = express()
 const bodyParser = require('body-parser')
 const config = require('./config')
 const api = require('./api/')
@@ -11,9 +12,7 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 
 // Web App
-app.get('/', function(req, res) {
-  res.send('This will someday be a little Vue app.')
-})
+app.use(express.static('./client'))
 
 // Auth
 function auth(req, res, next) {
