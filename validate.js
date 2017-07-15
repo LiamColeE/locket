@@ -11,7 +11,6 @@ val.validators.string = function(value) {
     }
   }
 }
-<<<<<<< HEAD
 val.validators.defined = function(value) {
   if (value === undefined) {
     return 'must be defined.'
@@ -19,8 +18,6 @@ val.validators.defined = function(value) {
     return undefined
   }
 }
-=======
->>>>>>> origin/account-api
 module.exports = val
 
 module.exports.constraints = {}
