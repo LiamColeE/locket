@@ -43,7 +43,7 @@ var config = {
 }
 var configDefaults = {
   useHTTPS: false,
-  dataPath: path.resolve(workingDir, './data.locket'),
+  dataPath: path.resolve(workingDir, './locket.msgpack'),
   configPath: path.resolve(workingDir, './config.js'),
   port: 8080,
   tempPass: 'please_do_not_use_this_default...'
